@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Galvarino eCommerce{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row g-4">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Jugo de Naranja Andina">
+                <div class="card-body">
+                    <h5 class="card-title">Jugo de Naranja Andina</h5>
+                    <p class="card-text">Jugo natural de naranja Coca-Cola, 1 litro</p>
+                    <p><strong>Precio:</strong> $1500.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1300.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Soda Pepsi">
+                <div class="card-body">
+                    <h5 class="card-title">Soda Pepsi</h5>
+                    <p class="card-text">Soda Pepsi en lata de 350ml</p>
+                    <p><strong>Precio:</strong> $1200.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1000.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Producto 3 - Duraznos en Almibar La Fama -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Duraznos en Almibar La Fama">
+                <div class="card-body">
+                    <h5 class="card-title">Duraznos en Almibar La Fama</h5>
+                    <p class="card-text">Duraznos en almibar La Fama, lata de 800g</p>
+                    <p><strong>Precio:</strong> $1300.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1100.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Crema de Leche Ideal">
+                <div class="card-body">
+                    <h5 class="card-title">Crema de Leche Ideal</h5>
+                    <p class="card-text">Crema de leche Ideal, 250ml</p>
+                    <p><strong>Precio:</strong> $2200.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1900.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Pan de Caja Bimbo">
+                <div class="card-body">
+                    <h5 class="card-title">Pan de Caja Bimbo</h5>
+                    <p class="card-text">Pan de caja Bimbo tipo francés, 500g</p>
+                    <p><strong>Precio:</strong> $1500.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1300.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Tortillas de Maíz Maseca">
+                <div class="card-body">
+                    <h5 class="card-title">Tortillas de Maíz Maseca</h5>
+                    <p class="card-text">Tortillas de maíz Maseca, paquete de 12</p>
+                    <p><strong>Precio:</strong> $1000.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $900.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Masa para Pizza Don Vittorio">
+                <div class="card-body">
+                    <h5 class="card-title">Masa para Pizza Don Vittorio</h5>
+                    <p class="card-text">Masa para pizza Don Vittorio, 500g</p>
+                    <p><strong>Precio:</strong> $1800.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $1500.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Desodorante Axe">
+                <div class="card-body">
+                    <h5 class="card-title">Desodorante Axe</h5>
+                    <p class="card-text">Desodorante Axe en aerosol, 150ml</p>
+                    <p><strong>Precio:</strong> $1100.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $950.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg product-card">
+                <img src="{{ producto.foto.url }}" class="card-img-top" alt="Queso Crema Philadelphia">
+                <div class="card-body">
+                    <h5 class="card-title">Queso Crema Philadelphia</h5>
+                    <p class="card-text">Queso crema Philadelphia para untar, 200g</p>
+                    <p><strong>Precio:</strong> $2500.00</p>
+                    <p><strong>Precio Mayoreo:</strong> $2300.00</p>
+                    <a href="#" class="btn btn-primary w-100">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

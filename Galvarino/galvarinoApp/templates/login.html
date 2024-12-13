@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center mt-2">
+    <div class="card shadow-sm" style="width: 30rem;">
+        <div id="div_login" class="card-body">
+            <h1 class="text-center mb-4">Inicio de sesión</h1>
+
+            <!-- Mostrar mensajes de error o éxito -->
+            {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Formulario de inicio de sesión -->
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }} <!-- Mostrar los campos del formulario automáticamente -->
+                <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+
+            </form>
+
+            <div class="text-center mt-3">
+                <p>¿No tienes cuenta? <a href="{% url 'registro_cliente' %}" class="text-primary">Regístrate aquí</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
