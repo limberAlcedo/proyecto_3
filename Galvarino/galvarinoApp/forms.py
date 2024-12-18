@@ -84,3 +84,72 @@ class ContactForm(forms.Form):
     name = forms.CharField(max_length=100, label='Nombre', widget=forms.TextInput(attrs={'placeholder': 'Tu nombre completo'}))
     email = forms.EmailField(label='Correo electrónico', widget=forms.EmailInput(attrs={'placeholder': 'tuemail@ejemplo.com'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Escribe tu mensaje aquí...'}), label='Mensaje')
+
+
+# galvarinoApp/forms.py
+from django import forms
+from django.contrib.auth.models import User
+from .models import ClientePersonalizado
+
+# Formulario para editar Cliente
+class ClientePersonalizadoForm(forms.ModelForm):
+    class Meta:
+        model = ClientePersonalizado
+        fields = ['rut', 'nombre', 'apellido', 'correo_electronico', 'telefono', 'direccion', 'estado', 'rol']
+        widgets = {
+            'rut': forms.TextInput(attrs={'placeholder': '12.345.678-0'}),
+            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre'}),
+            'apellido': forms.TextInput(attrs={'placeholder': 'Apellidos'}),
+            'correo_electronico': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.com'}),
+            'telefono': forms.TextInput(attrs={'placeholder': '+569 12345678'}),
+            'direccion': forms.TextInput(attrs={'placeholder': 'Tu dirección'}),
+        }
+
+# Formulario de Registro de Cliente
+class RegistroClienteForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirmar Contraseña'}))
+
+    class Meta:
+        model = ClientePersonalizado
+        fields = ['rut', 'nombre', 'apellido', 'correo_electronico', 'telefono', 'direccion']
+        widgets = {
+            'rut': forms.TextInput(attrs={'placeholder': '12.345.678-0'}),
+            'nombre': forms.TextInput(attrs={'placeholder': 'Nombre'}),
+            'apellido': forms.TextInput(attrs={'placeholder': 'Apellidos'}),
+            'correo_electronico': forms.EmailInput(attrs={'placeholder': 'correo@ejemplo.com'}),
+            'telefono': forms.TextInput(attrs={'placeholder': '+569 12345678'}),
+            'direccion': forms.TextInput(attrs={'placeholder': 'Tu dirección'}),
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+        
+        if password != confirm_password:
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+        return cleaned_data
+
+    def save(self, commit=True):
+        # Creamos el usuario
+        user = User.objects.create_user(
+            username=self.cleaned_data['correo_electronico'],  
+            password=self.cleaned_data['password']
+        )
+        
+        # Guardamos el cliente y asociamos el usuario
+        cliente = super().save(commit=False)
+        cliente.user = user  # Asociamos el cliente al usuario
+        if commit:
+            cliente.save()
+        return cliente
+
+
+from django import forms
+from .models import Producto
+
+class ProductoForm(forms.ModelForm):
+    class Meta:
+        model = Producto
+        fields = ['nombre', 'descripcion', 'precio', 'precio_mayoreo', 'stock', 'categoria', 'codigo_producto', 'foto']

@@ -8,7 +8,6 @@
         <div id="div_login" class="card-body">
             <h1 class="text-center mb-4">Inicio de sesión</h1>
 
-            <!-- Mostrar mensajes de error o éxito -->
             {% if messages %}
             <div class="alert alert-danger">
                 {% for message in messages %}
@@ -17,7 +16,6 @@
             </div>
             {% endif %}
 
-            <!-- Formulario de inicio de sesión -->
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }} <!-- Mostrar los campos del formulario automáticamente -->

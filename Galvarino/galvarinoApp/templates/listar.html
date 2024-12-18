@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-0 ">
+    <h2 class="mb-4 text-center">Lista de Usuarios</h2>
+    <div class="table-responsive">
+        <table class="table-custom ">
+            <thead>
+                <tr>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo Electrónico</th>
+                    <th>Rol</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.rut }}</td>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.apellido }}</td>
+                    <td>{{ cliente.correo_electronico }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if cliente.rol == 'admin' %}bg-danger
+                            {% elif cliente.rol == 'picker' %}bg-warning
+                            {% else %}bg-info
+                            {% endif %}">
+                            {{ cliente.rol|title }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'editar_cliente' cliente.pk %}" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a href="{% url 'eliminar_cliente' cliente.pk %}" class="btn btn-sm btn-danger"
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                            <i class="fas fa-trash-alt"></i> Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+        <a href="{% url 'crear_cliente' %}" class="btn btn-success border border-dark">
+            <i class="fas fa-user-plus"></i> Crear nuevo Usuario
+        </a>
+    </div>
+</div>
+{% endblock %}

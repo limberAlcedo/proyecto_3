@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center my-0 text-uppercase" style="font-size: 2.5rem; font-weight: 00;">
+    {% if producto %}Editar Producto{% else %}Crear Producto{% endif %}
+</h1>
+<div class="container mt-0">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm rounded-3">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group mb-3">
+                            {{ form.as_p }}
+                        </div>
+
+                        <style>
+                            .form-group .form-control[name="descripcion"] {
+                                height: 60px;
+                                font-size: 20px;
+                            }
+
+                            .btn-custom {
+                                width: 100%;
+                                border-radius: 30px;
+                                padding: 8px;
+                                font-size: 0.95rem;
+                                transition: all 0.3s ease;
+                            }
+
+                            .btn-custom:hover {
+                                transform: scale(1.05);
+                                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+                            }
+
+                            .btn-primary,
+                            .btn-outline-secondary {
+                                padding: 6px 10px;
+                                font-size: 0.85rem;
+                            }
+                        </style>
+
+                        <div class="d-flex flex-column gap-3 mt-4">
+                            <button type="submit" class="btn btn-primary btn-custom">
+                                {% if producto %}Guardar Cambios{% else %}Crear Producto{% endif %}
+                            </button>
+                            <a href="{% url 'producto_lista' %}" class="btn btn-outline-secondary btn-custom">
+                                Volver a la lista
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
