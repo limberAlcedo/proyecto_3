@@ -230,11 +230,10 @@ def editar_cliente(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Cliente actualizado correctamente.')
-            return redirect('listar.html')  # Redirige al listado de clientes
+            return redirect('listar_clientes')  # Redirige al listado de clientes
     else:
         form = ClientePersonalizadoForm(instance=cliente)
     return render(request, 'editar_cliente.html', {'form': form})
-
 # Vista para eliminar un cliente
 @login_required
 def eliminar_cliente(request, pk):
