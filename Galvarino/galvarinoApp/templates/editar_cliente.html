@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-2">
+    <h1 class="text-center mb-4" style="color: #7f8c8d;">Editar Cliente</h2>
+        <form method="POST" class="w-25 mx-auto border p-4 rounded">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
+                <a href="{% url 'listar_clientes' %}" class="btn btn-danger btn-sm">Cancelar</a>
+            </div>
+        </form>
+</div>
+{% endblock %}

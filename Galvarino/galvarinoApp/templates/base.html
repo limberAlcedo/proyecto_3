@@ -31,16 +31,14 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'contacto' %}">Contacto</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'categorias' %}">Categorías</a>
                     </li>
 
-                    {% if request.session.is_user %}
+                    {% if request.session.is_admin %}
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'lista_usuarios' %}">Pedidos</a>
                     </li>
-
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'lista_productos' %}">Nuevo Producto</a>
                     </li>
@@ -50,25 +48,40 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'ofertas' %}">Ofertas</a>
                     </li>
+                    {% elif request.session.is_picker %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'lista_usuarios' %}">Pedidos</a>
+                    </li>
+                    {% elif request.session.is_normal %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'mis_pedidos' %}">Mis Pedidos</a>
+                    </li>
                     {% endif %}
-
-                    <ul class="navbar-nav ml-auto">
-                        {% if request.session.usuario_id %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'carrito' %}">
-                                <i class="bi bi-cart-fill"></i> Carrito
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'logout' %}">Cerrar sesión</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
-                        </li>
-                        {% endif %}
-                    </ul>
                 </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    {% if request.session.usuario_id %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'carrito' %}">
+                            <i class="bi bi-cart-fill"></i> Carrito
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'productos' %}">Modificar Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'listar_clientes' %}">Usuarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
             </div>
         </div>
     </nav>

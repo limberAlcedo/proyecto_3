@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Productos - Galvarino eCommerce{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4" style="color: #7f8c8d;">Lista de Productos</h1>
+
+<!-- Botón de Agregar Nuevo Producto -->
+<div class="text-center mb-4">
+    <a href="{% url 'crear_producto' %}" class="btn btn-success btn-lg">Agregar Nuevo Producto</a>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">{{ producto.descripcion }}</p>
+                    <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+                    <p><strong>Precio Mayoreo:</strong> ${{ producto.precio_mayoreo }}</p>
+                    <p><strong>Stock:</strong> {{ producto.stock }}</p>
+                    <a href="{% url 'editar_producto' producto.pk %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'eliminar_producto' producto.pk %}" class="btn btn-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

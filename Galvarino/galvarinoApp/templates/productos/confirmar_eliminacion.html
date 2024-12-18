@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Producto - Galvarino eCommerce{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4" style="color: #e74c3c;">¿Estás seguro de eliminar este producto?</h1>
+<div class="container mt-4">
+    <div class="card shadow-lg" style="max-width: 600px; margin: 0 auto;">
+        <div class="card-body style text-center">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+            <p><strong>Precio Mayoreo:</strong> ${{ producto.precio_mayoreo }}</p>
+            <p><strong>Stock:</strong> {{ producto.stock }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger w-100 mb-2">Eliminar</button>
+                <a href="{% url 'producto_lista' %}" class="btn btn-secondary w-100">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

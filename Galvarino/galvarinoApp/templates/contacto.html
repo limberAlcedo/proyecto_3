@@ -4,30 +4,40 @@
 
 {% block content %}
 <!-- Sección de Contacto -->
-<div class="container mt-5">
-    <h1 class="text-center mb-4 text-primary">Contacto</h1>
+<div class="container mt-0">
+    <h1 class="text-center mb-4" style="color: #7f8c8d;">Contacto</h1>
     <p class="text-center mb-4 text-muted">
         ¿Tienes alguna duda o pregunta? Estamos aquí para ayudarte.
-        Puedes ponerte en contacto con nosotros mediante el siguiente formulario o nuestras redes sociales.
+        Contáctanos mediante el siguiente formulario o nuestras redes sociales.
     </p>
 
-    <!-- Formulario de contacto -->
-    <div class="contact-form">
-        <form method="post">
+    <div class="contact-form" id="div_login" style="max-width: 500px; margin: 0 auto;">
+        <form method="post" id="formulario_login">
             {% csrf_token %}
 
-            <!-- Renderiza el formulario automáticamente -->
-            {{ form.as_p }}
+            <div class="form-group mb-4">
+                <label for="id_name" class="custom-label">Nombre</label>
+                {{ form.name }}
+            </div>
 
-            <button type="submit" class="btn btn-primary btn-lg w-100">Enviar mensaje</button>
+            <div class="form-group mb-4">
+                <label for="id_email" class="custom-label">Correo electrónico</label>
+                {{ form.email }}
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="id_message" class="custom-label">Mensaje</label>
+                {{ form.message }}
+            </div>
+
+            <button type="submit" class="custom-btn-save w-100">Enviar mensaje</button>
         </form>
     </div>
 
-    <!-- Mensajes de confirmación -->
     {% if messages %}
-    <div class="messages mt-4">
+    <div class="mt-4">
         {% for message in messages %}
-        <p class="message">{{ message }}</p>
+        <div class="alert alert-info">{{ message }}</div>
         {% endfor %}
     </div>
     {% endif %}

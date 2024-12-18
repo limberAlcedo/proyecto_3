@@ -3,8 +3,8 @@
 {% block title %}Registro{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center mt-2">
-    <div class="card shadow-sm" style="width: 30rem;">
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card shadow-sm" style="width: 20rem;">
         <div id="div_login" class="card-body">
             <h2 class="text-center mb-4">Registro</h2>
 
@@ -17,14 +17,14 @@
             </div>
             {% endif %}
 
-            <!-- Formulario de registro -->
             <form method="POST">
                 {% csrf_token %}
-                {{ form.as_p }} <!-- Mostrar los campos del formulario automáticamente -->
+                {{ form.as_p }}
 
                 <div class="text-center mt-3">
-                    <button type="submit" class="btn btn-primary">Registrarme</button>
-                    <button type="button" class="btn btn-danger w-50" onclick="window.history.back()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary w-100">Registrarme</button>
+                    <button type="button" class="btn btn-danger w-100 mt-2"
+                        onclick="window.history.back()">Cancelar</button>
                 </div>
             </form>
             <div class="text-center mt-3">

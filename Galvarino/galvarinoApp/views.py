@@ -4,8 +4,33 @@ from django.contrib import messages
 from .forms import RegistroClienteForm, LoginForm
 from django.shortcuts import render
 from .forms import ContactoForm
+from django.shortcuts import render
+from .models import Producto
+
 def index(request):
-    return render(request, 'index.html')
+    productos = Producto.objects.all()
+    return render(request, 'index.html', {'productos': productos})
+
+
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import Producto
+
+def lista_productos(request):
+    # Obtenemos todos los productos
+    productos = Producto.objects.all()
+
+    # Creamos un paginador que cargue 10 productos por página
+    paginator = Paginator(productos, 10)
+
+    # Obtenemos la página actual de la solicitud
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'productos/lista.html', {'page_obj': page_obj})
+
+
+
 def carrito(request):
     return render(request, 'carrito.html')
 
@@ -17,6 +42,12 @@ def lista_usuarios(request):
 
 
 
+from django.shortcuts import render
+from .models import ClientePersonalizado
+
+def listar_clientes(request):
+    clientes = ClientePersonalizado.objects.all()
+    return render(request, 'listar.html', {'clientes': clientes})
 
 
 def quienes_somos(request):
@@ -166,3 +197,89 @@ def logout_view(request):
     if 'is_user' in request.session:
         del request.session['is_user']  # Eliminar la clave is_user de la sesión
     return redirect('index')
+
+
+# galvarinoApp/views.py
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import ClientePersonalizado
+from .forms import ClientePersonalizadoForm, RegistroClienteForm
+
+# Vista para listar todos los clientes
+
+# Vista para crear un nuevo cliente
+@login_required
+def crear_cliente(request):
+    if request.method == 'POST':
+        form = RegistroClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente creado correctamente.')
+            return redirect('listar_clientes')  # Redirige al listado de clientes
+    else:
+        form = RegistroClienteForm()
+    return render(request, 'crear_cliente.html', {'form': form})
+
+# Vista para editar un cliente
+@login_required
+def editar_cliente(request, pk):
+    cliente = get_object_or_404(ClientePersonalizado, pk=pk)
+    if request.method == 'POST':
+        form = ClientePersonalizadoForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente actualizado correctamente.')
+            return redirect('listar_clientes')  # Redirige al listado de clientes
+    else:
+        form = ClientePersonalizadoForm(instance=cliente)
+    return render(request, 'editar_cliente.html', {'form': form})
+# Vista para eliminar un cliente
+@login_required
+def eliminar_cliente(request, pk):
+    cliente = get_object_or_404(ClientePersonalizado, pk=pk)
+    if request.method == 'POST':
+        cliente.delete()
+        messages.success(request, 'Cliente eliminado correctamente.')
+        return redirect('listar_clientes')  # Redirige al listado de clientes
+    return render(request, 'eliminar_cliente.html', {'cliente': cliente})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Producto
+from .forms import ProductoForm
+
+# Lista de productos
+def producto_lista(request):
+    productos = Producto.objects.all()
+    return render(request, 'productos/lista.html', {'productos': productos})
+
+# Crear producto
+def crear_producto(request):
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('producto_lista')
+    else:
+        form = ProductoForm()
+    return render(request, 'productos/form.html', {'form': form})
+
+# Editar producto
+def editar_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+            return redirect('producto_lista')
+    else:
+        form = ProductoForm(instance=producto)
+    return render(request, 'productos/form.html', {'form': form, 'producto': producto})
+
+# Eliminar producto
+def eliminar_producto(request, pk):
+    producto = get_object_or_404(Producto, pk=pk)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('producto_lista')
+    return render(request, 'productos/confirmar_eliminacion.html', {'producto': producto})
