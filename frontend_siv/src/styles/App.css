@@ -1,0 +1,191 @@
+/* -----------------------------
+   BODY & GENERAL
+----------------------------- */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #e0f7e9, #fff4e6);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* -----------------------------
+   APP CONTAINER
+----------------------------- */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* -----------------------------
+   NAVBAR
+----------------------------- */
+.navbar {
+    background-color: #28a745;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+    margin-right: 15px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: #ff6600;
+}
+
+/* -----------------------------
+   AUTH FORM
+----------------------------- */
+.auth-form {
+    max-width: 450px;
+    margin: 60px auto;
+    background: #ffffffdd; /* fondo semi-transparente */
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #28a745;
+    font-weight: 700;
+}
+
+/* Inputs */
+.auth-form input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+    outline: none;
+}
+
+/* Buttons */
+.auth-form button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 15px;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+button.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+button.btn-success:hover {
+    background-color: #1e7e34;
+    transform: translateY(-2px);
+}
+
+button.btn-warning {
+    background-color: #ff6600;
+    color: white;
+}
+
+button.btn-warning:hover {
+    background-color: #e65c00;
+    transform: translateY(-2px);
+}
+
+/* Links */
+.auth-form .form-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #28a745;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.auth-form .form-link:hover {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+/* -----------------------------
+   FOOTER
+----------------------------- */
+.footer {
+    background-color: #28a745;
+    border-radius: 20px 20px 0 0;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+}
+
+/* -----------------------------
+   DASHBOARD CARDS
+----------------------------- */
+.dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard .cards-container {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.dashboard .card {
+    flex: 1;
+    min-width: 250px;
+    background: #ffffffcc;
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* -----------------------------
+   RESPONSIVE
+----------------------------- */
+@media (max-width: 768px) {
+    .dashboard .cards-container {
+        flex-direction: column;
+    }
+    .auth-form {
+        margin: 40px 15px;
+        padding: 30px 20px;
+    }
+}
