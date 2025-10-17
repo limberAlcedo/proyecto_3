@@ -1,19 +1,31 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./layout/Navbar";
+import Footer from "./layout/Footer";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-
+import { useState } from "react";
 import "./styles/App.css";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
+      <div className={`app-container ${!isLoggedIn ? "blurred" : ""}`}>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+
+      {!isLoggedIn && (
+        <div className="overlay">
+          <Login onLogin={() => setIsLoggedIn(true)} />
+        </div>
+      )}
     </Router>
   );
 }

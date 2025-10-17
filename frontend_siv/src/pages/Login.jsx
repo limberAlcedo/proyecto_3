@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const API_URL = "http://127.0.0.1:8000";
 
-const Login = ({ switchView }) => {
+export default function Login({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
-
     try {
       const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
@@ -18,33 +15,38 @@ const Login = ({ switchView }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || "Error de login");
-      setMessage(data.message);
+      if (res.ok) {
+        alert("✅ Inicio de sesión exitoso");
+        onLogin(); // <-- Aquí se quita el blur
+      } else {
+        alert(data.detail || "Error al iniciar sesión");
+      }
     } catch (err) {
-      setMessage(err.message);
+      console.error(err);
     }
   };
 
   return (
-    <div className="card p-4 mx-auto shadow rounded" style={{ maxWidth: "400px", backgroundColor: "#f8f9fa" }}>
-      <h3 className="text-center mb-3">Login</h3>
-      {message && <div className="alert alert-info">{message}</div>}
-      <form onSubmit={handleLogin}>
-        <div className="mb-3">
-          <label>Email</label>
-          <input type="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </div>
-        <div className="mb-3">
-          <label>Contraseña</label>
-          <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <button className="btn btn-primary w-100" type="submit">Ingresar</button>
-      </form>
-      <p className="text-center mt-3">
-        ¿No tienes cuenta? <button className="btn btn-link p-0" onClick={switchView}>Regístrate</button>
-      </p>
+    <div className="auth-form">
+      <h2>Iniciar Sesión</h2>
+      <input
+        type="email"
+        placeholder="Correo"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button className="btn-warning" onClick={handleSubmit}>
+        Ingresar
+      </button>
+      <a href="/register" className="form-link">
+        ¿No tienes cuenta? Regístrate
+      </a>
     </div>
   );
-};
-
-export default Login;
+}

@@ -14,7 +14,7 @@ models.Base.metadata.create_all(bind=engine)
 # ---------------------------
 # Configuración CORS
 # ---------------------------
-origins = ["http://localhost:5173"]
+origins = ["http://localhost:5179"]
 app = FastAPI(title="Backend SIV", version="1.0")
 app.add_middleware(
     CORSMiddleware,

@@ -1,11 +1,7 @@
-import React from "react";
-
-const Footer = () => {
+export default function Footer() {
   return (
     <footer className="footer">
-      <p>© 2025 SIV - Todos los derechos reservados</p>
+      &copy; 2025 SIV App. Todos los derechos reservados.
     </footer>
   );
-};
-
-export default Footer;
+}
